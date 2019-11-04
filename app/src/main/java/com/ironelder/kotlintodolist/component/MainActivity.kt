@@ -1,7 +1,8 @@
-package com.ironelder.kotlintodolist
+package com.ironelder.kotlintodolist.component
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ironelder.kotlintodolist.R
 
 class MainActivity : AppCompatActivity() {
 
