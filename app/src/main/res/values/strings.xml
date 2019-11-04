@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">kotlintodolist</string>
+    <string name="hint_input_todo">해야할 일을 적어주세요.</string>
+    <string name="label_sortby">Sort By</string>
+    <string name="label_sortby_content">Contents</string>
+    <string name="label_sortby_date">Date</string>
 </resources>
