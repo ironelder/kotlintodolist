@@ -48,6 +48,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_todo_header" />
 
+    <Button
+        android:id="@+id/btn_test_button"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="TestButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_todo_footer"
         android:layout_width="0dp"

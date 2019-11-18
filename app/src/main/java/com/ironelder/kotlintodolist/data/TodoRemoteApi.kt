@@ -3,7 +3,7 @@ package com.ironelder.kotlintodolist.data
 import retrofit2.Call
 import retrofit2.http.*
 
-interface ITodoRemoteApi {
+interface TodoRemoteApi {
 
     @GET("todos")
     fun requestGetAllTodoList(): Call<ArrayList<TodoModel>>
