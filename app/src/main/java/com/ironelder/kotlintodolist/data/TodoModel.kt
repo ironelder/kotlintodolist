@@ -6,5 +6,5 @@ data class TodoModel(
     val done: Boolean,
     val id: Int,
     val seq: Int,
-    val updatedAt: String
+    val updatedAt: String?
 )
