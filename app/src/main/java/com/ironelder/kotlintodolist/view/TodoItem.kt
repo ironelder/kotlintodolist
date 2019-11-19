@@ -8,7 +8,7 @@ import com.ironelder.kotlintodolist.R
 import com.ironelder.kotlintodolist.data.TodoModel
 import kotlinx.android.synthetic.main.layout_todo_item.view.*
 
-class TodoItem(context:Context?) : ConstraintLayout(context) {
+class TodoItem(context: Context?) : ConstraintLayout(context) {
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_todo_item, this, true)
         layoutParams = RecyclerView.LayoutParams(
@@ -16,8 +16,9 @@ class TodoItem(context:Context?) : ConstraintLayout(context) {
             RecyclerView.LayoutParams.WRAP_CONTENT
         )
     }
-    fun setData(todoItem:TodoModel){
-        et_todo_content.setText(todoItem.content)
-        tv_todo_date.text = todoItem.updatedAt?:todoItem.createdAt
+
+    fun setData(todoData: TodoModel) {
+        et_todo_content.setText(todoData.content)
+        tv_todo_date.text = todoData.updatedAt ?: todoData.createdAt
     }
 }
