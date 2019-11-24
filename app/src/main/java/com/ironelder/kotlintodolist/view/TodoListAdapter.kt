@@ -17,7 +17,7 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.TodoItemHolder>() {
         holder.setData(mTodoItemList[position])
     }
 
-    fun setTodoItemList(todoItemList: ArrayList<TodoModel>) {
+    fun setTodoItemList(todoItemList: ArrayList<TodoModel>?) {
         mTodoItemList.clear()
         if (!todoItemList.isNullOrEmpty()) {
             mTodoItemList.addAll(todoItemList)
