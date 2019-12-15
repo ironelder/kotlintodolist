@@ -30,9 +30,11 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.TodoItemHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addTodoItem(todoItem: TodoModel) {
-        mTodoItemList.add(todoItem)
-        notifyItemInserted(mTodoItemList.size - 1)
+    fun addTodoItem(todoItem: TodoModel?) {
+        if(todoItem != null){
+            mTodoItemList.add(todoItem)
+            notifyItemInserted(mTodoItemList.size - 1)
+        }
     }
 
     fun addTodoItemList(todoItemList: ArrayList<TodoModel>?) {

@@ -2,10 +2,12 @@ package com.ironelder.kotlintodolist.component
 
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ironelder.kotlintodolist.R
+import com.ironelder.kotlintodolist.common.hideKeyboard
 import com.ironelder.kotlintodolist.data.RequestTodoRemoteApi
 import com.ironelder.kotlintodolist.data.TodoModel
 import com.ironelder.kotlintodolist.view.TodoListAdapter
@@ -59,6 +61,34 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+        }
+
+        et_input_todo.setOnEditorActionListener { v, actionId, _event ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    RequestTodoRemoteApi.todoRemoteApi.requestCreateTodoItem(v.text.toString())
+                        .enqueue(object : Callback<TodoModel> {
+                            override fun onFailure(call: Call<TodoModel>, t: Throwable) {
+                                println("Error ${t.message}")
+                            }
+
+                            override fun onResponse(
+                                call: Call<TodoModel>,
+                                response: Response<TodoModel>
+                            ) {
+                                println("success")
+                                (rv_todo_listview.adapter as? TodoListAdapter)?.addTodoItem(response.body())
+                                hideKeyboard(et_input_todo)
+                            }
+
+                        })
+                }
+                else -> {
+                    print("")
+                    return@setOnEditorActionListener false
+                }
+            }
+            true
         }
     }
 }
