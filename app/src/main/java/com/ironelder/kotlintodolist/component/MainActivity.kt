@@ -3,6 +3,7 @@ package com.ironelder.kotlintodolist.component
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    private val LOG_TAG = MainActivity::class.java.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val requestTodoList = RequestTodoRemoteApi.todoRemoteApi.requestGetAllTodoList()
         requestTodoList.enqueue(object : Callback<ArrayList<TodoModel>> {
             override fun onFailure(call: Call<ArrayList<TodoModel>>, t: Throwable) {
-                Log.d("TodoTestButton", "Fail Response , ${t.message}, ${t.cause}")
+                Log.d(LOG_TAG, "Fail Response , ${t.message}, ${t.cause}")
             }
 
             override fun onResponse(
@@ -49,14 +51,14 @@ class MainActivity : AppCompatActivity() {
             val requestTest = RequestTodoRemoteApi.todoRemoteApi.requestGetAllTodoList()
             requestTest.enqueue(object : Callback<ArrayList<TodoModel>> {
                 override fun onFailure(call: Call<ArrayList<TodoModel>>, t: Throwable) {
-                    Log.d("TodoTestButton", "Fail Response , ${t.message}, ${t.cause}")
+                    Log.d(LOG_TAG, "Fail Response , ${t.message}, ${t.cause}")
                 }
 
                 override fun onResponse(
                     call: Call<ArrayList<TodoModel>>,
                     response: Response<ArrayList<TodoModel>>
                 ) {
-                    Log.d("TodoTestButton", "Call Response Success")
+                    Log.d(LOG_TAG, "Call Response Success")
                     (rv_todo_listview.adapter as? TodoListAdapter)?.setTodoItemList(response.body())
                 }
 
@@ -70,13 +72,13 @@ class MainActivity : AppCompatActivity() {
                         .enqueue(object : Callback<TodoModel> {
                             override fun onFailure(call: Call<TodoModel>, t: Throwable) {
                                 println("Error ${t.message}")
+                                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
                             }
 
                             override fun onResponse(
                                 call: Call<TodoModel>,
                                 response: Response<TodoModel>
                             ) {
-                                println("success")
                                 (rv_todo_listview.adapter as? TodoListAdapter)?.addTodoItem(response.body())
                                 hideKeyboard(et_input_todo)
                             }
@@ -84,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                         })
                 }
                 else -> {
-                    print("")
                     return@setOnEditorActionListener false
                 }
             }
