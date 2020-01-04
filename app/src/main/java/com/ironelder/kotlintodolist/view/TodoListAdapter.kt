@@ -1,13 +1,26 @@
 package com.ironelder.kotlintodolist.view
 
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.RecyclerView
 import com.ironelder.kotlintodolist.data.TodoModel
+import kotlinx.android.synthetic.main.layout_todo_item.view.*
 
 class TodoListAdapter : RecyclerView.Adapter<TodoListAdapter.TodoItemHolder>() {
     private var mTodoItemList = arrayListOf<TodoModel>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoItemHolder {
         val todoItemView = TodoItem(parent.context)
+        todoItemView.et_todo_content.setOnEditorActionListener { v, actionId, event ->
+            when (actionId){
+                EditorInfo.IME_ACTION_DONE ->{
+//TODO : How get ID?
+                }
+                else -> {
+                    return@setOnEditorActionListener false
+                }
+            }
+            true
+        }
         return TodoItemHolder(todoItemView)
     }
 
